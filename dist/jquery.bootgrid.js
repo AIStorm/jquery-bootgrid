@@ -121,7 +121,7 @@
                     headerAlign: data.headerAlign || "left",
                     cssClass: data.cssClass || "",
                     headerCssClass: data.headerCssClass || "",
-                    formatter: that.options.formatters[data.formatter] || null,
+                     formatter: that.options.formatters[data.columnId] || null,
                     order: (!sorted && (data.order === "asc" || data.order === "desc")) ? data.order : null,
                     searchable: !(data.searchable === false), // default: true
                     sortable: !(data.sortable === false), // default: true
@@ -617,7 +617,7 @@
                     if (column.visible)
                     {
                         var value = ($.isFunction(column.formatter)) ?
-                                column.formatter.call(that, column, row) :
+                                column.formatter.call(that, column, row, row[column.id]) :
                                     column.converter.to(row[column.id]),
                             cssClass = (column.cssClass.length > 0) ? " " + column.cssClass : "";
                         cells += tpl.cell.resolve(getParams.call(that, {
